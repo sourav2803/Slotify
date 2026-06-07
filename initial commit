@@ -1,0 +1,32 @@
+backend/
+├── alembic/              # Database migration scripts (Alembic/SQLAlchemy)
+├── tests/                # Pytest unit and integration tests
+├── .env                  # Environment variables (DB URLs, API Keys)
+└── requirements.txt      # Project dependencies
+└── app/
+    ├── main.py           # Entry point: Initializes FastAPI & includes routers
+    ├── api/              # API Route Handlers
+    │   ├── deps.py       # Dependencies (Auth guards, DB session injection)
+    │   └── v1/           # Versioned API endpoints
+    │       ├── router.py # Main router tying all modules together
+    │       ├── auth.py
+    │       └── ...       # (appointments, customers, services, etc.)
+    ├── core/             # Global Configuration
+    │   ├── config.py     # Pydantic settings management
+    │   ├── security.py   # JWT logic & Password hashing (Passlib/Jose)
+    │   └── database.py   # SQLAlchemy engine & session local setup
+    ├── models/           # SQLAlchemy ORM Models (Database Tables)
+    │   ├── user.py
+    │   ├── appointment.py
+    │   └── ...
+    ├── schemas/          # Pydantic Models (Data Validation & Serialization)
+    │   ├── appointment.py
+    │   ├── customer.py
+    │   └── ...
+    ├── services/         # Complex Business Logic (The "Brain")
+    │   ├── availability.py # Slot calculation engine
+    │   ├── notifications.py # Email/SMS dispatch logic
+    │   └── google_sync.py  # Third-party integrations
+    └── crud/             # Create, Read, Update, Delete (DB operations)
+        ├── base.py       # Generic CRUD class
+        └── ...           # Specific CRUD logic for each model
